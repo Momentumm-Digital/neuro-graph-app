@@ -1,14 +1,21 @@
-# App de Graphiques Neuropsychologiques
+# Neuro Graph App
 
-Ce projet permet de générer des graphiques complexes dans Webflow à partir d'un fichier JS externe.
+## Objectif
 
-## Flux de travail (Workflow)
+Web app pour spécialistes en santé mentale permettant la création et export de graphiques personnalisés.
 
-1. **Développement local** : Taper `npm start` pour lancer le serveur Parcel.
-2. **Lien Webflow** : Utiliser `http://localhost:1234/app.js` pour tester en direct.
-3. **Mise en ligne** : Faire un "Push" sur GitHub pour mettre à jour la version via jsDelivr.
+## Environnement de développement
 
-## Fichiers principaux
+- Parcel
+- Webflow
+- Chargement via localhost
 
-- `app.js` : Contient toute la logique de calcul et d'affichage (Chart.js).
-- `package.json` : Configuration des outils (Parcel).
+## Architecture actuelle
+
+- index.js → Bootstrap Webflow
+- legacy-v3.js → Script principal (en migration)
+- app/ → Modules progressivement extraits
+
+## Stratégie
+
+Migration progressive du legacy vers architecture modulaire.
