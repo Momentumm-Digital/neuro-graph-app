@@ -10,6 +10,7 @@ window.Webflow.push(async () => {
     console.log("🚀 readers loaded");
     console.log("🚀 chartMapper loaded");
     console.log("🚀 chartRenderer loaded");
+    console.log("🚀 events loaded");
 
   try {
     await import("./legacy-v3.js");
