@@ -8,6 +8,8 @@ window.Webflow.push(async () => {
     console.log("🚀 DOM loaded");
     console.log("🚀 colors loaded");
     console.log("🚀 readers loaded");
+    console.log("🚀 chartMapper loaded");
+    console.log("🚀 chartRenderer loaded");
 
   try {
     await import("./legacy-v3.js");

@@ -1,6 +1,6 @@
 import { DOM } from "./dom.js";
 import { Utils } from "./utils.js";
-import { State } from "./state.js"; // seulement si Readers lit/écrit State directement
+
 
 
 
