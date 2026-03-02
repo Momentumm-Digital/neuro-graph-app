@@ -1,5 +1,7 @@
 import { Utils } from "./app/utils.js";
 import { State } from "./app/state.js";
+import { DOM } from "./app/dom.js";
+import { Colors } from "./app/colors.js";
 /* ========================================================================== */
 /*  Chart JS legacy                                */
 /* ========================================================================== */
@@ -34,33 +36,6 @@ import { State } from "./app/state.js";
      1.5) COLORS (Schemes Saule + apply)
      ====================================================================== */
 
-const SAULE_SCHEMES = {
-  calm: ["#2F6B4F", "#3D8C6E", "#78C2A4", "#BFE9D7", "#E7F7F1"],
-  contrast: ["#1F6F8B", "#155368", "#99C7D6", "#6FAFC3", "#E6F2F5"],
-  neutral: ["#111827", "#374151", "#6B7280", "#9CA3AF", "#E5E7EB"],
-};
-
-const Colors = {
-  getScheme(name) {
-    return SAULE_SCHEMES[name] || SAULE_SCHEMES.calm;
-  },
-  applyScheme(chart, schemeName, opts = {}) {
-    if (!chart) return;
-
-    const palette = Colors.getScheme(schemeName);
-    const fillAlpha = typeof opts.fillAlpha === "number" ? opts.fillAlpha : 0.18;
-    const borderWidth = typeof opts.borderWidth === "number" ? opts.borderWidth : 2;
-
-    (chart.data.datasets || []).forEach((ds, i) => {
-      const c = palette[i % palette.length];
-      ds.borderColor = c;
-      ds.backgroundColor = Utils.hexToRgba(c, fillAlpha) || c;
-      ds.borderWidth = borderWidth;
-    });
-
-    if (opts.update !== false) chart.update();
-  },
-};
 
 
   // ----------------------------
@@ -96,22 +71,6 @@ const Colors = {
 
 
 
-
-  // ----------------------------
-  // 2) DOM Cache (un seul endroit pour attraper le DOM)
-  // ----------------------------
-  const DOM = {
-    table: document.querySelector(".chart-table"),
-    settingsPanel: document.querySelector('[data-ui="settings-panel"]'),
-    canvas: document.querySelector("#chart-canvas"),
-  };
-
-  if (!DOM.table || !DOM.settingsPanel || !DOM.canvas) {
-    console.warn(
-      "[ChartApp] DOM missing. Need .chart-table, [data-ui=settings-panel], #chart-canvas"
-    );
-    return;
-  }
 
 
   // ----------------------------
@@ -1520,13 +1479,14 @@ const Templates = {
   // ----------------------------
   // 9) Init
   // ----------------------------
-  function init() {	
+    function init() {	
+      
 
-		if (window.ChartDataLabels) Chart.register(ChartDataLabels);
+    if (window.ChartDataLabels) Chart.register(ChartDataLabels);
     // Valeur par défaut: si tu as déjà un bouton actif, tu peux le détecter ici.
     // Sinon, on garde "bar-vertical".	
     KeyboardNavigation.init();
-		syncChartTypeButtonsUI();
+	syncChartTypeButtonsUI();
     registerAnnotationPlugin();
     syncAndRender();
     Events.init();
