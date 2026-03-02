@@ -2,7 +2,9 @@
 
 window.Webflow ||= [];
 window.Webflow.push(async () => {
-  console.log("🚀 Graph App ready (Webflow loaded)");
+    console.log("🚀 Graph App ready (Webflow loaded)");
+    console.log("🚀 Utils loaded");
+    console.log("🚀 State loaded");
 
   try {
     await import("./legacy-v3.js");
