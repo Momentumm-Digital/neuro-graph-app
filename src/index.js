@@ -7,6 +7,7 @@ window.Webflow.push(async () => {
     console.log("🚀 State loaded");
     console.log("🚀 DOM loaded");
     console.log("🚀 colors loaded");
+    console.log("🚀 readers loaded");
 
   try {
     await import("./legacy-v3.js");
