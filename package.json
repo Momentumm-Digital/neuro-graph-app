@@ -1,0 +1,14 @@
+{
+  "name": "neuro-graph-app",
+  "version": "1.0.0",
+  "description": "Développement : Création de graphiques pour spécialiste en santé mentale",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  }
+}
