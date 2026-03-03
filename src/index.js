@@ -11,6 +11,8 @@ window.Webflow.push(async () => {
     console.log("🚀 chartMapper loaded");
     console.log("🚀 chartRenderer loaded");
     console.log("🚀 grid loaded");
+    console.log("🚀 export loaded");
+    console.log("🚀 template loaded");
 
 
   try {
