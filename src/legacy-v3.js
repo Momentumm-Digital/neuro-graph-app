@@ -6,6 +6,8 @@ import { Readers } from "./app/readers.js";
 import { ChartMapper } from "./app/ChartMapper.js";
 import { ChartRenderer } from "./app/chartRenderer.js";
 import { toggleRespondentPickersDisabled } from "./app/ui.js";
+import { applyDrawingRowVisibility } from "./app/drawings.js";
+import { applyGridColumns } from "./app/grid.js";
 
 /* ========================================================================== */
 /*  Chart JS legacy                                */
@@ -293,15 +295,7 @@ function getAutoChartHeightPx(itemCount, density = "standard") {
   // Ajuster le styling du tableau lorsqu'on ajoute des répondnats
   // ---
 
-  function applyGridColumns() {
-    const count = State.respondents.length; // nb de répondants (r1..rN)
 
-    // applique sur header + toutes les rows data
-    const rows = DOM.table.querySelectorAll(".chart-row");
-    rows.forEach((row) => {
-      row.style.setProperty("--respondent-cols", String(count));
-    });
-  }
   
   
   const DrawingActions = {
@@ -419,19 +413,7 @@ function getAutoChartHeightPx(itemCount, density = "standard") {
   // ---
 
 
-  function applyDrawingRowVisibility() {
-    const rows = DOM.settingsPanel.querySelectorAll(".param-row[data-drawing-id]");
-    rows.forEach((row) => {
-      const typeSelect = row.querySelector('[data-setting="draw-type"]');
-      const type = typeSelect ? typeSelect.value : "line";
 
-      const zoneGroup = row.querySelector('[data-drawing-group="zone"]');
-      const lineGroup = row.querySelector('[data-drawing-group="line"]');
-
-      if (zoneGroup) zoneGroup.style.display = type === "zone" ? "" : "none";
-      if (lineGroup) lineGroup.style.display = type === "line" ? "" : "none";
-    });
-  }
 
   // ----------------------------
   // Enregistrer le plugin d'annotations
