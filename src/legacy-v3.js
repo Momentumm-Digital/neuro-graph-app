@@ -5,6 +5,7 @@ import { Colors } from "./app/colors.js";
 import { Readers } from "./app/readers.js";
 import { ChartMapper } from "./app/ChartMapper.js";
 import { ChartRenderer } from "./app/chartRenderer.js";
+import { toggleRespondentPickersDisabled } from "./app/ui.js";
 
 /* ========================================================================== */
 /*  Chart JS legacy                                */
@@ -46,29 +47,7 @@ import { ChartRenderer } from "./app/chartRenderer.js";
   // Désactivation des colors pickers à la sélection d'un thème
   // ----------------------------
 
-  function toggleRespondentPickersDisabled(enabled) {
-    const headerRow = DOM.table.querySelector(
-      '.chart-row.is-header[data-row-type="head"]'
-    );
-    if (!headerRow) return;
 
-    const pickers = headerRow.querySelectorAll(
-      'input[data-role="respondent-color"]'
-    );
-
-    pickers.forEach((input) => {
-      input.disabled = enabled;
-
-      // effet visuel léger
-      if (enabled) {
-        input.style.opacity = "0.5";
-        input.style.cursor = "not-allowed";
-      } else {
-        input.style.opacity = "";
-        input.style.cursor = "";
-      }
-    });
-  }
 
 
 
