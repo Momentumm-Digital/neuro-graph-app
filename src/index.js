@@ -14,8 +14,9 @@ window.Webflow.push(async () => {
     console.log("🚀 export loaded");
     console.log("🚀 template loaded");
     console.log("🚀 plugins loaded");
-    console.log("🚀 tableactions loaded");
-
+    console.log("🚀 table actions loaded");
+    console.log("🚀 drawing actions loaded");
+    console.log("🚀 keyboard nav loaded");
 
   try {
     await import("./legacy-v3.js");

@@ -1,8 +1,13 @@
 // src/app/grid.js
 
-import { State } from "./app/state.js";
-import { DOM } from "./app/dom.js";
-import { applyDrawingRowVisibility } from "./app/drawings.js";
+import { State } from "./state.js";
+import { DOM } from "./dom.js";
+import { Templates } from "./templates.js";
+import { TableActions } from "./tableActions.js";
+import { DrawingActions } from "./drawingActions.js";
+import { syncChartTypeButtonsUI } from "./ui.js";
+import { applyDrawingRowVisibility } from "./drawingUI.js";
+import { syncAndRender } from "./sync.js";
 
 
 

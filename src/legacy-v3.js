@@ -11,6 +11,8 @@ import { applyGridColumns } from "./app/grid.js";
 import { ExportActions } from "./app/export.js";
 import { registerAnnotationPlugin } from "./app/plugins.js";
 import { tableActions } from "./app/tableActions.js";
+import { DrawingActions } from "./app/drawingActions.js";
+import { KeyboardNavigation } from "./app/keyboardNavigation.js";
 
 /* ========================================================================== */
 /*  Chart JS legacy                                */
@@ -101,79 +103,6 @@ function getAutoChartHeightPx(itemCount, density = "standard") {
   // ---
 
 
-  const DrawingActions = {
-    getContainer() {
-      // Le parent qui contient toutes les param-row (à ajuster si tu as un wrapper dédié)
-      return DOM.settingsPanel;
-    },
-
-    getRows() {
-      return Array.from(
-        DOM.settingsPanel.querySelectorAll(".param-row[data-drawing-id]")
-      );
-    },
-
-    getTemplateRow() {
-      return this.getRows()[0] || null;
-    },
-
-    getNextId() {
-      const rows = this.getRows();
-      let i = 1;
-      const existing = rows.map((r) => r.getAttribute("data-drawing-id"));
-      while (existing.includes(`drw${i}`)) i++;
-      return `drw${i}`;
-    },
-
-    resetRow(rowEl) {
-      // reset tous les inputs/selects de la row (simple)
-      rowEl.querySelectorAll("input").forEach((inp) => {
-        if (inp.type === "checkbox") inp.checked = false;
-        else inp.value = "";
-      });
-
-      rowEl.querySelectorAll("select").forEach((sel) => {
-        // default: garder la première option
-        sel.selectedIndex = 0;
-      });
-    },
-
-    addRow() {
-      const container = this.getContainer();
-      const template = this.getTemplateRow();
-      if (!container || !template) {
-        console.warn("[ChartApp] No drawing template row found (.param-row[data-drawing-id])");
-        return;
-      }
-
-      const newRow = template.cloneNode(true);
-      newRow.setAttribute("data-drawing-id", this.getNextId());
-      this.resetRow(newRow);
-
-      // Insère après la dernière row existante
-      const rows = this.getRows();
-      const last = rows[rows.length - 1];
-      if (last && last.parentNode) {
-        last.parentNode.insertBefore(newRow, last.nextSibling);
-      } else {
-        container.appendChild(newRow);
-      }
-    },
-
-    deleteRow(btnEl) {
-      const row = btnEl.closest('.param-row[data-drawing-id]');
-      if (!row) return;
-
-      const rows = this.getRows();
-      if (rows.length <= 1) {
-        // UX safe: on reset au lieu de supprimer la dernière
-        this.resetRow(row);
-        return;
-      }
-
-      row.remove();
-    },
-  };
 
 
 
@@ -354,76 +283,7 @@ function getAutoChartHeightPx(itemCount, density = "standard") {
   };
 
   
-  const KeyboardNavigation = {
-  init() {
-    DOM.table.addEventListener("keydown", (e) => {
-      const target = e.target;
-      if (!(target instanceof HTMLInputElement)) return;
 
-      const isScore = target.matches('input[data-role="score"]');
-      const isItem = target.matches('input[data-role="item"]');
-      if (!isScore && !isItem) return;
-
-      const key = e.key;
-
-      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Enter"].includes(key)) {
-        e.preventDefault();
-        this.move(target, key, e.shiftKey);
-      }
-    });
-  },
-
-  move(input, key, shift) {
-    const row = input.closest('.chart-row.is-data[data-row-type="data"]');
-    if (!row) return;
-
-    const body = DOM.table.querySelector(".chart-table_body");
-    const rows = Array.from(
-      body.querySelectorAll('.chart-row.is-data[data-row-type="data"]')
-    );
-
-    const currentRowIndex = rows.indexOf(row);
-
-    const cells = Array.from(row.querySelectorAll("input[data-role]"));
-    const currentCellIndex = cells.indexOf(input);
-
-    let nextRowIndex = currentRowIndex;
-    let nextCellIndex = currentCellIndex;
-
-    switch (key) {
-      case "ArrowRight":
-        nextCellIndex++;
-        break;
-
-      case "ArrowLeft":
-        nextCellIndex--;
-        break;
-
-      case "ArrowDown":
-        nextRowIndex++;
-        break;
-
-      case "ArrowUp":
-        nextRowIndex--;
-        break;
-
-      case "Enter":
-        nextRowIndex += shift ? -1 : 1;
-        break;
-    }
-
-    const nextRow = rows[nextRowIndex];
-    if (!nextRow) return;
-
-    const nextInputs = Array.from(nextRow.querySelectorAll("input[data-role]"));
-    const nextInput = nextInputs[nextCellIndex];
-
-    if (nextInput) {
-      nextInput.focus();
-      nextInput.select?.();
-    }
-  },
-};
 
 
 
