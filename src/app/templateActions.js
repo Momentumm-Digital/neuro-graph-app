@@ -1,11 +1,17 @@
 // src/app/grid.js
 
 
+
 import { State } from "./state.js";
 import { DOM } from "./dom.js";
 import { applyDrawingRowVisibility } from "./drawings.js";
+import { TableActions } from "./tableActions.js";
+import { DrawingActions } from "./drawingActions.js";
 import { Templates } from "./templates.js";
-import { TemplateActions } from "./templateActions.js";
+import { UI } from "./ui.js";
+import { syncAndRender } from "./sync.js";
+
+
 
 
 export const TemplateActions = {
@@ -37,7 +43,7 @@ export const TemplateActions = {
       this.setDrawings(tpl.drawings);
 
       // 6) UI buttons active + render
-      syncChartTypeButtonsUI();
+      UI.syncChartTypeButtonsUI();
       applyDrawingRowVisibility();
       syncAndRender();
     },

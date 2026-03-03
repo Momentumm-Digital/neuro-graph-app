@@ -10,12 +10,13 @@ import { applyDrawingRowVisibility } from "./app/drawings.js";
 import { applyGridColumns } from "./app/grid.js";
 import { ExportActions } from "./app/export.js";
 import { registerAnnotationPlugin } from "./app/plugins.js";
-import { tableActions } from "./app/tableActions.js";
+import { TableActions } from "./app/tableActions.js";
 import { DrawingActions } from "./app/drawingActions.js";
 import { KeyboardNavigation } from "./app/keyboardNavigation.js";
 import { Templates } from "./app/templates.js";
 import { TemplateActions } from "./app/templateActions.js";
 import { Layout } from "./app/layout.js";
+import { syncAndRender } from "./app/sync.js";
 
 /* ========================================================================== */
 /*  Chart JS legacy                                */
@@ -86,28 +87,7 @@ import { Layout } from "./app/layout.js";
 
 
 
-  function syncAndRender() {
-    State.respondents = Readers.readRespondentsFromHeader();
-    State.rows = Readers.readRowsFromBody(State.respondents);
-    State.drawings = Readers.readDrawings();
 
-    const settings = Readers.readSettings();
-    State.scale = settings.scale;
-    State.text = settings.text;
-
-    if (settings.colors && typeof settings.colors === "object") {
- 			 State.colors = settings.colors;
-			}
-    
-    State.layout = settings.layout || State.layout || { density: "standard" };
-		Layout.applyChartAutoHeight();
-    
-    UI.toggleRespondentPickersDisabled(State.colors?.enabled);
-
-    applyDrawingRowVisibility();
-    applyGridColumns();
-    ChartRenderer.render();
-  }
 
   const Events = {
   init() {
