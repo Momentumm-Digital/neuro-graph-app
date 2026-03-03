@@ -9,6 +9,7 @@ import { toggleRespondentPickersDisabled } from "./app/ui.js";
 import { applyDrawingRowVisibility } from "./app/drawings.js";
 import { applyGridColumns } from "./app/grid.js";
 import { ExportActions } from "./app/export.js";
+import { registerAnnotationPlugin } from "./app/plugins.js";
 
 /* ========================================================================== */
 /*  Chart JS legacy                                */
@@ -272,9 +273,6 @@ function getAutoChartHeightPx(itemCount, density = "standard") {
   return h;
 }
 
-// ----------------------------
-  // Ajuster hauteur du chart
-  // ---
 
   function applyChartAutoHeight() {
     const itemCount = Array.isArray(State.rows) ? State.rows.length : 0;
@@ -297,8 +295,6 @@ function getAutoChartHeightPx(itemCount, density = "standard") {
   // ---
 
 
-  
-  
   const DrawingActions = {
     getContainer() {
       // Le parent qui contient toutes les param-row (à ajuster si tu as un wrapper dédié)
@@ -373,50 +369,8 @@ function getAutoChartHeightPx(itemCount, density = "standard") {
     },
   };
 
-  // ----------------------------
-  // Export du graphique
-  // ---
-  
-
-  
-    // ----------------------------
-  //  Affichage des groupes lines/zones
-  // ---
 
 
-
-
-  // ----------------------------
-  // Enregistrer le plugin d'annotations
-  // ----------------------------
-
-function registerAnnotationPlugin() {
-  const plugins = Chart.registry?.plugins?.items;
-
-  if (!plugins) {
-    console.warn("[ChartApp] Chart registry not available.");
-    return false;
-  }
-
-  // Si déjà enregistré, on ne fait rien
-  if (plugins.annotation) return true;
-
-  // Si le plugin existe globalement, on l'enregistre
-  if (window.ChartAnnotation) {
-    Chart.register(window.ChartAnnotation);
-    return true;
-  }
-  
-
-
-
-  console.warn("[ChartApp] Annotation plugin not found. Check script order/URL.");
-  return false;
-}
-
-  // ----------------------------
-  // État des boutons de type de graphiques
-  // ----------------------------
 
 
   function syncChartTypeButtonsUI() {
@@ -432,11 +386,6 @@ function registerAnnotationPlugin() {
     });
   }
 
-
-
-  // ----------------------------
-  // 7) Sync: relire DOM -> State puis render
-  // ----------------------------
   function syncAndRender() {
     State.respondents = Readers.readRespondentsFromHeader();
     State.rows = Readers.readRowsFromBody(State.respondents);
@@ -459,9 +408,7 @@ function registerAnnotationPlugin() {
     applyGridColumns();
     ChartRenderer.render();
   }
-  // ----------------------------
-  // 8) Events (live update + actions)
-  // ----------------------------
+
   const Events = {
   init() {
     // 1) Live update: tableau
@@ -599,10 +546,7 @@ function registerAnnotationPlugin() {
       });
     },
   };
-  
-    // ----------------------------
-  // Navigation keyboard
-  // ----------------------------
+
   
   const KeyboardNavigation = {
   init() {

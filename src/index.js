@@ -13,6 +13,7 @@ window.Webflow.push(async () => {
     console.log("🚀 grid loaded");
     console.log("🚀 export loaded");
     console.log("🚀 template loaded");
+    console.log("🚀 plugins loaded");
 
 
   try {
