@@ -18,6 +18,8 @@ window.Webflow.push(async () => {
     console.log("🚀 drawing actions loaded");
     console.log("🚀 keyboard nav loaded");
     console.log("🚀 templates loaded");
+    console.log("🚀 UI loaded");
+    console.log("🚀 layout + UI loaded");
 
   try {
     await import("./legacy-v3.js");

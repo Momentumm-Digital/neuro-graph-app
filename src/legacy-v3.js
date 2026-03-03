@@ -5,7 +5,7 @@ import { Colors } from "./app/colors.js";
 import { Readers } from "./app/readers.js";
 import { ChartMapper } from "./app/ChartMapper.js";
 import { ChartRenderer } from "./app/chartRenderer.js";
-import { toggleRespondentPickersDisabled } from "./app/ui.js";
+import { UI } from "./app/ui.js";
 import { applyDrawingRowVisibility } from "./app/drawings.js";
 import { applyGridColumns } from "./app/grid.js";
 import { ExportActions } from "./app/export.js";
@@ -15,6 +15,7 @@ import { DrawingActions } from "./app/drawingActions.js";
 import { KeyboardNavigation } from "./app/keyboardNavigation.js";
 import { Templates } from "./app/templates.js";
 import { TemplateActions } from "./app/templateActions.js";
+import { Layout } from "./app/layout.js";
 
 /* ========================================================================== */
 /*  Chart JS legacy                                */
@@ -71,34 +72,7 @@ import { TemplateActions } from "./app/templateActions.js";
 // ----------------------------
 
 
-function getAutoChartHeightPx(itemCount, density = "standard") {
-  let h = 420;
 
-  if (itemCount <= 8) h = 420;
-  else if (itemCount <= 14) h = 620;
-  else if (itemCount <= 20) h = 820;
-  else h = 1020;
-
-  if (density === "expanded") h = Math.round(h * 1.2); // +20%
-  return h;
-}
-
-
-  function applyChartAutoHeight() {
-    const itemCount = Array.isArray(State.rows) ? State.rows.length : 0;
-    const density = State.layout?.density || "standard";
-
-    const h = getAutoChartHeightPx(itemCount, density);
-
-    // wrapper du canvas: idéalement un div dédié, sinon parentElement
-    const wrap = DOM.canvasWrap || DOM.canvas.parentElement;
-    if (!wrap) return;
-
-    wrap.style.height = `${h}px`;
-
-    // si chart déjà créé, il recalcule sa taille
-    if (State.chart) State.chart.resize();
-  }
 
   // ----------------------------
   // Ajuster le styling du tableau lorsqu'on ajoute des répondnats
@@ -110,18 +84,7 @@ function getAutoChartHeightPx(itemCount, density = "standard") {
 
 
 
-  function syncChartTypeButtonsUI() {
-    const buttons = DOM.settingsPanel.querySelectorAll(
-      '.chart-type-button[data-action="set-chart-type"]'
-    );
 
-    buttons.forEach((btn) => {
-      const type = btn.getAttribute("data-chart-type");
-      const isActive = type === State.chartType;
-      btn.classList.toggle("is-active", isActive);
-      btn.setAttribute("aria-pressed", isActive ? "true" : "false");
-    });
-  }
 
   function syncAndRender() {
     State.respondents = Readers.readRespondentsFromHeader();
@@ -137,9 +100,9 @@ function getAutoChartHeightPx(itemCount, density = "standard") {
 			}
     
     State.layout = settings.layout || State.layout || { density: "standard" };
-		applyChartAutoHeight();
+		Layout.applyChartAutoHeight();
     
-    toggleRespondentPickersDisabled(State.colors?.enabled);
+    UI.toggleRespondentPickersDisabled(State.colors?.enabled);
 
     applyDrawingRowVisibility();
     applyGridColumns();
@@ -202,7 +165,7 @@ function getAutoChartHeightPx(itemCount, density = "standard") {
         const chartType = btn.getAttribute("data-chart-type");
         if (chartType === "bar-vertical" || chartType === "bar-horizontal" || chartType === "line") {
           State.chartType = chartType;
-          syncChartTypeButtonsUI();
+          UI.syncChartTypeButtonsUI();
           syncAndRender();
         }
         return;
@@ -311,7 +274,7 @@ function getAutoChartHeightPx(itemCount, density = "standard") {
     // Valeur par défaut: si tu as déjà un bouton actif, tu peux le détecter ici.
     // Sinon, on garde "bar-vertical".	
     KeyboardNavigation.init();
-	syncChartTypeButtonsUI();
+	UI.syncChartTypeButtonsUI();
     registerAnnotationPlugin();
     syncAndRender();
     Events.init();
