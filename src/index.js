@@ -14,6 +14,7 @@ window.Webflow.push(async () => {
     console.log("🚀 export loaded");
     console.log("🚀 template loaded");
     console.log("🚀 plugins loaded");
+    console.log("🚀 tableactions loaded");
 
 
   try {
