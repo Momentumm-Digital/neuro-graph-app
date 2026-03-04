@@ -160,5 +160,37 @@ export const TemplateActions = {
       });
 
       applyDrawingRowVisibility();
-    },
+  },
+    
+    reset() {
+  // reset chart type
+  State.chartType = "bar-vertical";
+
+  // reset scale
+  this.setInput('[data-setting="scale-auto"]', true, "checkbox");
+  this.setInput('[data-setting="scale-min"]', "");
+  this.setInput('[data-setting="scale-max"]', "");
+  this.setInput('[data-setting="step"]', "");
+
+  // reset drawings
+  const rows = Array.from(
+    DOM.settingsPanel.querySelectorAll('.param-row[data-drawing-id]')
+  );
+
+  rows.forEach((row, i) => {
+    if (i === 0) {
+      DrawingActions.resetRow(row);
+    } else {
+      row.remove();
+    }
+  });
+
+  syncChartTypeButtonsUI();
+  syncAndRender();
+}
+    
+    
+    
+    
+    
   };

@@ -84,6 +84,11 @@ import { syncAndRender } from "./sync.js";
         return;
      }
         
+     if (action === "reset-template") {
+        TemplateActions.reset();
+        return;
+     }
+        
 if (action === "set-color-scheme") {
   const scheme = btn.getAttribute("data-ui-value");
 
