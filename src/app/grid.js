@@ -1,15 +1,13 @@
 // src/app/grid.js
 
-import { State } from "./state.js";
 import { DOM } from "./dom.js";
 
+
 export function applyGridColumns() {
-  const count = State.respondents.length;
+  const count = document.querySelectorAll(
+    '.chart-row.is-header [data-role="respondent"]'
+  ).length;
 
-  const rows = DOM.table?.querySelectorAll(".chart-row");
-  if (!rows) return;
-
-  rows.forEach((row) => {
-    row.style.setProperty("--respondent-cols", String(count));
-  });
+  const safe = Math.max(1, count);
+  DOM.table.style.setProperty("--respondent-cols", String(safe));
 }
