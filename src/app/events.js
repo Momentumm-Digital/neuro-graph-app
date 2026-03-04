@@ -71,13 +71,19 @@ import { syncAndRender } from "./sync.js";
         }
         return;
       }
+        
+        
 
-      if (action === "apply-template") {
+     if (action === "apply-template") {
         const templateId = btn.getAttribute("data-template-id");
+
+        State.templateId = templateId;
+        UI.syncActiveGroup("template", templateId);
+
         TemplateActions.apply(templateId);
         return;
-      }
-
+     }
+        
       if (action === "add-item") {
         TableActions.addRowToEnd();
         syncAndRender();

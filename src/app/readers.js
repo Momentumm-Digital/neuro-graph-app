@@ -82,6 +82,7 @@ export const Readers = {
         const showValues = panel.querySelector('[data-setting="show-values"]');
         const colorsEnabled = panel.querySelector('[data-setting="colors-enabled"]');
         const colorScheme = panel.querySelector('[data-setting="color-scheme"]');
+        //const colorScheme = panel.querySelector('[data-setting="color-scheme"]:checked');
         const density = panel.querySelector('[data-setting="layout-density"]:checked');
 
         return {

@@ -38,8 +38,24 @@ toggleRespondentPickersDisabled(enabled) {
         btn.classList.toggle("is-active", isActive);
         btn.setAttribute("aria-pressed", isActive ? "true" : "false");
       });
-    }
-  };
+  },
+
+  syncActiveGroup(group, activeValue) {
+    const els = DOM.settingsPanel.querySelectorAll(
+      `[data-ui-group="${group}"]`
+    );
+
+    els.forEach((el) => {
+      const v = el.getAttribute("data-ui-value");
+      const isActive = v === activeValue;
+
+      el.classList.toggle("is-active", isActive);
+      el.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+  }
+    
+
+};
 
 
 

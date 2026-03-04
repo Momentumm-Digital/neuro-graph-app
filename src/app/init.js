@@ -4,6 +4,7 @@ import { UI } from "./ui.js";
 import { registerAnnotationPlugin } from "./plugins.js";
 import { syncAndRender } from "./sync.js";
 import { Events } from "./events.js";
+import { State } from "./state.js";
 
 export function init() {
   // Chart.js plugins (CDN globals)
@@ -11,6 +12,7 @@ export function init() {
 
   KeyboardNavigation.init();
   UI.syncChartTypeButtonsUI();
+  UI.syncActiveGroup("template", State.templateId);
   registerAnnotationPlugin();
   syncAndRender();
   Events.init();
