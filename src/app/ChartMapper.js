@@ -96,31 +96,6 @@ if (d.type === "zone" && d.zone?.min !== null && d.zone?.max !== null) {
 
     const chartJsType = isLine ? "line" : "bar";
 
-    /*const options = {
-      responsive: true,
-      maintainAspectRatio: false,
-
-      plugins: {
-        legend: { display: State.text.showLegend },
-        title: { display: State.text.showTitle, text: "Résultats" },
-
-        // ✅ Annotations plugin
-        annotation: {
-          annotations: this.buildAnnotations(), // ✅ use this (robust)
-        },
-      },
-
-      scales: {
-        x: {
-          display: State.text.showX,
-          beginAtZero: true,
-        },
-        y: {
-          display: State.text.showY,
-          beginAtZero: true,
-        },
-      },
-    };*/
 
     const options = {
       responsive: true,
@@ -146,18 +121,6 @@ if (d.type === "zone" && d.zone?.min !== null && d.zone?.max !== null) {
           },
         },
 
-       /* title: {
-          display: State.text.showTitle,
-          text: "Résultats",
-          color: "#0f172a",
-          font: {
-            size: 18,
-            weight: "600",
-          },
-          padding: {
-            bottom: 20,
-          },
-        },*/
 
         annotation: {
           annotations: this.buildAnnotations(), // ✅ on garde ton plugin

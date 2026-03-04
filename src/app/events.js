@@ -1,7 +1,13 @@
-// src/app/events.js
 
-import { State } from "./app/state.js";
-import { DOM } from "./app/dom.js";
+import { State } from "./state.js";
+import { DOM } from "./dom.js";
+import { UI } from "./ui.js";
+import { ExportActions } from "./export.js";
+import { TableActions } from "./tableActions.js";
+import { DrawingActions } from "./drawingActions.js";
+import { TemplateActions } from "./templateActions.js";
+import { syncAndRender } from "./sync.js";
+
 
 
   export const Events = {
@@ -60,7 +66,7 @@ import { DOM } from "./app/dom.js";
         const chartType = btn.getAttribute("data-chart-type");
         if (chartType === "bar-vertical" || chartType === "bar-horizontal" || chartType === "line") {
           State.chartType = chartType;
-          syncChartTypeButtonsUI();
+          UI.syncChartTypeButtonsUI();
           syncAndRender();
         }
         return;
@@ -105,10 +111,10 @@ import { DOM } from "./app/dom.js";
   }
   
   if (action === "add-respondent") {
-  	TableActions.addRespondent();
-  	syncAndRender();
-  	return;
-	}
+    TableActions.addRespondent();
+    syncAndRender();
+    return;
+    }
     if (action === "delete-respondent") {
     const headerCell = btn.closest('.chart-cell[data-col]');
     const colId = headerCell?.getAttribute("data-col");
@@ -141,5 +147,3 @@ import { DOM } from "./app/dom.js";
       });
     },
   };
-
-
