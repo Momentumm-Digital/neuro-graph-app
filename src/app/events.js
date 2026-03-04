@@ -84,6 +84,25 @@ import { syncAndRender } from "./sync.js";
         return;
      }
         
+if (action === "set-color-scheme") {
+  const scheme = btn.getAttribute("data-ui-value");
+
+  const hidden = DOM.settingsPanel.querySelector('[data-setting="color-scheme"]');
+  if (hidden) hidden.value = scheme;
+
+  const toggle = DOM.settingsPanel.querySelector('[data-setting="colors-enabled"]');
+  if (toggle && !toggle.checked) toggle.checked = true;
+
+  syncAndRender();
+
+  // 🔒 re-force l'état actif après tout resync
+  UI.syncActiveGroup("color-scheme", scheme);
+
+  return;
+}
+        
+        
+        
       if (action === "add-item") {
         TableActions.addRowToEnd();
         syncAndRender();
