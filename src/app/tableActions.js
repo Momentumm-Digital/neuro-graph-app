@@ -1,9 +1,11 @@
-import { DOM } from "./dom.js";
 import { State } from "./state.js";
+import { DOM } from "./dom.js";
 import { Utils } from "./utils.js";
 
 export const TableActions = {
-  // ---- Helpers DOM
+  // ----------------------------
+  // Helpers DOM
+  // ----------------------------
   getBody() {
     return DOM.table.querySelector(".chart-table_body");
   },
