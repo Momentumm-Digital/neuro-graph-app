@@ -115,8 +115,9 @@ import { syncAndRender } from "./sync.js";
         TemplateActions.apply(templateId);
         return;
         }
-        
+
         if (action === "reset-chart") {
+        alert("reset-chart clicked");
         TemplateActions.resetChart();
         UI.syncActiveGroup("template", null);
         return;
