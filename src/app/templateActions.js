@@ -1,4 +1,4 @@
-// src/app/grid.js
+// src/app/templateActions.js
 
 
 
@@ -185,8 +185,11 @@ export const TemplateActions = {
     }
   });
 
-  syncChartTypeButtonsUI();
+  State.templateId = null;
+  UI.syncActiveGroup("template", null);
+  UI.syncChartTypeButtonsUI();
   syncAndRender();
+
 }
     
     
