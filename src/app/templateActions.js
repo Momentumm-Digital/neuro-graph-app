@@ -16,6 +16,7 @@ import { syncAndRender } from "./sync.js";
 
 export const TemplateActions = {
   apply(templateId) {
+    alert("APPLY " + templateId);
     const tpl = Templates[templateId];
     if (!tpl) return;
 
