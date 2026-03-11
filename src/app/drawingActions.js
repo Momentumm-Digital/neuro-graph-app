@@ -26,18 +26,27 @@ export const DrawingActions = {
       return `drw${i}`;
     },
 
-    resetRow(rowEl) {
-      // reset tous les inputs/selects de la row (simple)
-      rowEl.querySelectorAll("input").forEach((inp) => {
-        if (inp.type === "checkbox") inp.checked = false;
-        else inp.value = "";
-      });
+resetRow(rowEl) {
+  rowEl.querySelectorAll("input").forEach((inp) => {
+    if (inp.type === "checkbox") {
+      inp.checked = false;
+    } else if (inp.type === "color") {
+      if (inp.matches('[data-setting="zone-color"]')) {
+        inp.value = "#22c55e";
+      } else if (inp.matches('[data-setting="line-color"]')) {
+        inp.value = "#0f172a";
+      } else {
+        inp.value = "#000000";
+      }
+    } else {
+      inp.value = "";
+    }
+  });
 
-      rowEl.querySelectorAll("select").forEach((sel) => {
-        // default: garder la première option
-        sel.selectedIndex = 0;
-      });
-    },
+  rowEl.querySelectorAll("select").forEach((sel) => {
+    sel.selectedIndex = 0;
+  });
+},
 
     addRow() {
       const container = this.getContainer();
