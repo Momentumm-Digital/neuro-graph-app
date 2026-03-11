@@ -1,7 +1,5 @@
 // src/app/templateActions.js
 
-
-
 import { State } from "./state.js";
 import { DOM } from "./dom.js";
 import { applyDrawingRowVisibility } from "./drawings.js";
@@ -11,12 +9,8 @@ import { Templates } from "./templates.js";
 import { UI } from "./ui.js";
 import { syncAndRender } from "./sync.js";
 
-
-
-
 export const TemplateActions = {
   apply(templateId) {
-    alert("APPLY " + templateId);
     const tpl = Templates[templateId];
     if (!tpl) return;
 
@@ -86,10 +80,7 @@ export const TemplateActions = {
     this.setRespondentNames(tpl.respondents || [""]);
     this.resetRespondentColors();
 
-    // 8) Reset de tous les scores
-    this.resetAllScores();
-
-    // 9) Drawings / annotations
+    // 8) Drawings / annotations
     this.ensureDrawingRowCount(Math.max(1, tpl.drawings?.length || 1));
 
     if (tpl.drawings && tpl.drawings.length) {
@@ -98,23 +89,11 @@ export const TemplateActions = {
       this.clearDrawings();
     }
 
-    // 10) UI sync
+    // 9) UI sync
     UI.syncChartTypeButtonsUI();
     applyDrawingRowVisibility();
     syncAndRender();
   },
-
-
-
-  resetAllScores() {
-  const body = DOM.table.querySelector(".chart-table_body");
-  if (!body) return;
-
-  const scoreInputs = body.querySelectorAll('input[data-role="score"]');
-  scoreInputs.forEach((input) => {
-    input.value = "0";
-  });
-},
 
   setInput(selector, value, kind = "text") {
     const el = DOM.settingsPanel.querySelector(selector);
@@ -200,7 +179,9 @@ export const TemplateActions = {
     );
     if (!headerRow) return;
 
-    const cells = Array.from(headerRow.querySelectorAll('.chart-cell[data-col]'));
+    const cells = Array.from(
+      headerRow.querySelectorAll(".chart-cell[data-col]")
+    );
 
     cells.forEach((cell, i) => {
       const nameInput = cell.querySelector('input[data-role="respondent"]');
@@ -214,10 +195,14 @@ export const TemplateActions = {
     );
     if (!headerRow) return;
 
-    const cells = Array.from(headerRow.querySelectorAll('.chart-cell[data-col]'));
+    const cells = Array.from(
+      headerRow.querySelectorAll(".chart-cell[data-col]")
+    );
 
     cells.forEach((cell) => {
-      const colorInput = cell.querySelector('input[data-role="respondent-color"]');
+      const colorInput = cell.querySelector(
+        'input[data-role="respondent-color"]'
+      );
       if (colorInput) colorInput.value = "#000000";
     });
   },
