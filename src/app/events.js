@@ -115,6 +115,12 @@ import { syncAndRender } from "./sync.js";
         TemplateActions.apply(templateId);
         return;
         }
+        
+        if (action === "reset-chart") {
+        TemplateActions.resetChart();
+        UI.syncActiveGroup("template", null);
+        return;
+        }
 
         if (action === "reset-template") {
         TemplateActions.reset();

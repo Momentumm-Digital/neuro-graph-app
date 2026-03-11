@@ -95,6 +95,56 @@ export const TemplateActions = {
     syncAndRender();
   },
 
+
+    resetChart() {
+    // type par défaut
+    State.chartType = "bar-vertical";
+    State.templateId = null;
+
+    // settings
+    this.setInput('[data-setting="scale-auto"]', true, "checkbox");
+    this.setInput('[data-setting="scale-min"]', "");
+    this.setInput('[data-setting="scale-max"]', "");
+    this.setInput('[data-setting="step"]', "");
+
+    this.setInput('[data-setting="show-legend"]', true, "checkbox");
+    this.setInput('[data-setting="show-title"]', false, "checkbox");
+    this.setInput('[data-setting="show-x"]', true, "checkbox");
+    this.setInput('[data-setting="show-y"]', true, "checkbox");
+    this.setInput('[data-setting="show-values"]', false, "checkbox");
+
+    this.setInput('[data-setting="colors-enabled"]', false, "checkbox");
+    this.setInput('[data-setting="color-scheme"]', "calm");
+
+    this.setRadioInput('[data-setting="layout-density"]', "standard");
+
+    // tableau: 1 ligne, 1 répondant
+    this.ensureRowCount(1);
+    this.ensureRespondentCount(1);
+
+    this.setItems([""]);
+    this.setRespondentNames([""]);
+    this.resetRespondentColors();
+
+    // remet tous les scores à 0
+    const body = DOM.table.querySelector(".chart-table_body");
+    if (body) {
+      const scoreInputs = body.querySelectorAll('input[data-role="score"]');
+      scoreInputs.forEach((input) => {
+        input.value = "0";
+      });
+    }
+
+    // drawings
+    this.ensureDrawingRowCount(1);
+    this.clearDrawings();
+
+    // UI + render
+    UI.syncChartTypeButtonsUI();
+    applyDrawingRowVisibility();
+    syncAndRender();
+  },
+
   setInput(selector, value, kind = "text") {
     const el = DOM.settingsPanel.querySelector(selector);
     if (!el) return;
