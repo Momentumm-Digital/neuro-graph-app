@@ -85,7 +85,10 @@ export const TemplateActions = {
     this.setRespondentNames(tpl.respondents || [""]);
     this.resetRespondentColors();
 
-    // 8) Drawings / annotations
+    // 8) Reset de tous les scores
+    this.resetAllScores();
+
+    // 9) Drawings / annotations
     this.ensureDrawingRowCount(Math.max(1, tpl.drawings?.length || 1));
 
     if (tpl.drawings && tpl.drawings.length) {
@@ -94,11 +97,23 @@ export const TemplateActions = {
       this.clearDrawings();
     }
 
-    // 9) UI sync
-    syncChartTypeButtonsUI();
+    // 10) UI sync
+    UI.syncChartTypeButtonsUI();
     applyDrawingRowVisibility();
     syncAndRender();
   },
+
+
+
+  resetAllScores() {
+  const body = DOM.table.querySelector(".chart-table_body");
+  if (!body) return;
+
+  const scoreInputs = body.querySelectorAll('input[data-role="score"]');
+  scoreInputs.forEach((input) => {
+    input.value = "0";
+  });
+},
 
   setInput(selector, value, kind = "text") {
     const el = DOM.settingsPanel.querySelector(selector);
