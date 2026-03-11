@@ -204,7 +204,10 @@ DOM.table.addEventListener("click", (e) => {
         }
 
         if (action === "reset-chart") {
-        alert("reset-chart clicked");
+        const ok = confirm("Réinitialiser le graphique ?");
+        if (!ok) return;
+
+
         TemplateActions.resetChart();
         UI.syncActiveGroup("template", null);
         return;
