@@ -1,8 +1,7 @@
 {
   "name": "neuro-graph-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Développement : Création de graphiques pour spécialiste en santé mentale",
-
   "scripts": {
     "dev": "parcel src/index.js --dist-dir dist",
     "build": "parcel build src/index.js --dist-dir dist"
