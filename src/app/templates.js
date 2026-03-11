@@ -1,6 +1,31 @@
 
 
 export const Templates = {
+
+  reset: {
+    id: "reset",
+    label: "Reset",
+    chartType: "bar-vertical",
+    scale: { auto: true, min: null, max: null, step: null },
+    items: [""],
+    respondents: [""],
+    drawings: [],
+    text: {
+      showLegend: true,
+      showTitle: false,
+      showX: true,
+      showY: true,
+      showValues: false,
+    },
+    colors: {
+      enabled: false,
+      scheme: "calm",
+    },
+    layout: {
+      density: "standard",
+    },
+  },
+
   qi: {
     id: "qi",
     label: "Template 1 — QI",
