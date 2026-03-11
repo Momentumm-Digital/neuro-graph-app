@@ -26,7 +26,8 @@ export const DrawingActions = {
       return `drw${i}`;
     },
 
-resetRow(rowEl) {
+  resetRow(rowEl) {
+  console.log("[resetRow] corrected version loaded");
   rowEl.querySelectorAll("input").forEach((inp) => {
     if (inp.type === "checkbox") {
       inp.checked = false;
