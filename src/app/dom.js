@@ -9,4 +9,7 @@ export const DOM = {
   get canvas() {
     return document.querySelector("#chart-canvas");
   },
+    get chartTitle() {
+    return document.querySelector('[data-ui="chart-title"]');
+  }
 };

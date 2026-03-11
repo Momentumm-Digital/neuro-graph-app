@@ -119,8 +119,8 @@ export const TemplateActions = {
     this.setRadioInput('[data-setting="layout-density"]', "standard");
 
     // tableau: 1 ligne, 1 répondant
-    this.ensureRowCount(1);
-    this.ensureRespondentCount(1);
+    this.ensureRowCount(3);
+    this.ensureRespondentCount(3);
 
     this.setItems([""]);
     this.setRespondentNames([""]);
@@ -131,7 +131,7 @@ export const TemplateActions = {
     if (body) {
       const scoreInputs = body.querySelectorAll('input[data-role="score"]');
       scoreInputs.forEach((input) => {
-        input.value = "0";
+        input.value = " ";
       });
     }
 
@@ -199,7 +199,7 @@ export const TemplateActions = {
       if (itemInput) itemInput.value = items[i] ?? "";
 
       rowEl.querySelectorAll('input[data-role="score"]').forEach((inp) => {
-        inp.value = "0";
+        inp.value = " ";
       });
     });
   },

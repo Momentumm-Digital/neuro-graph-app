@@ -25,6 +25,7 @@ export const State = {
     showX: true,
     showY: true,
     showValues: false,
+    title: "",
   },
 
   colors: {

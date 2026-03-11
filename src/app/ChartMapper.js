@@ -17,7 +17,7 @@ export const ChartMapper = {
         Utils.toNumber(row.scores?.[resp.colId], 0)
       ),
       borderColor: resp.color,
-      backgroundColor: resp.color,
+      backgroundColor: Utils.hexToRgba(resp.color, 0.45) || resp.color,
       fill: false,
       tension: 0.25,
     }));

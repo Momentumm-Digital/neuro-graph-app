@@ -105,7 +105,7 @@ export const TableActions = {
 
     // scores
     rowEl.querySelectorAll('input[data-role="score"]').forEach((inp) => {
-      inp.value = "0";
+      inp.value = " ";
     });
   },
 
@@ -171,7 +171,7 @@ export const TableActions = {
       newScoreCell.setAttribute("data-col", colId);
 
       const scoreInput = newScoreCell.querySelector('input[data-role="score"]');
-      if (scoreInput) scoreInput.value = "0";
+      if (scoreInput) scoreInput.value = " ";
 
       rowEl.appendChild(newScoreCell);
     });

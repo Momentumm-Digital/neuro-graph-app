@@ -9,6 +9,11 @@ import { TemplateActions } from "./templateActions.js";
 import { syncAndRender } from "./sync.js";
 
 
+    function closeAllColorPickers(except = null) {
+    document.querySelectorAll(".color-input-wrap.is-open").forEach((el) => {
+        if (el !== except) el.classList.remove("is-open");
+    });
+    }
 
   export const Events = {
     init() {
@@ -37,7 +42,7 @@ import { syncAndRender } from "./sync.js";
         }
     });
 
-    // 3) Live update: settings panel (change)
+    // 3a) Live update: settings panel (change)
     DOM.settingsPanel.addEventListener("change", (e) => {
         const t = e.target;
         if (!(t instanceof Element)) return;
@@ -54,32 +59,114 @@ import { syncAndRender } from "./sync.js";
         syncAndRender();
         }
     });
+          
+    // 3b) Open / close custom color picker in settings panel
+    DOM.settingsPanel.addEventListener("click", (e) => {
+    const current = e.target.closest(".color-current");
+    if (!current) return;
 
-    // 4) Color swatches: respondent colors (custom picker)
+    const picker = current.closest(".color-input-wrap");
+    if (!picker) return;
+
+    const willOpen = !picker.classList.contains("is-open");
+
+    document.querySelectorAll(".color-input-wrap.is-open").forEach((el) => {
+        el.classList.remove("is-open");
+    });
+
+    if (willOpen) {
+        picker.classList.add("is-open");
+    }
+    });
+          
+          
+          
+// 4a) Color swatches: respondent colors (custom picker)
+DOM.table.addEventListener("click", (e) => {
+  const swatch = e.target.closest(".color-swatch");
+  if (!swatch) return;
+
+  const picker = swatch.closest(".color-input-wrap");
+  if (!picker) return;
+  if (picker.classList.contains("is-disabled")) return;
+
+  const input = picker.querySelector(
+    'input[data-role$="-color"], input[data-setting$="-color"]'
+  );
+
+  const current = picker.querySelector(".color-current");
+  const color = swatch.dataset.color;
+
+  if (!input || !color || input.disabled) return;
+
+  // update visuel
+  if (current) {
+    current.style.backgroundColor = color;
+  }
+
+  // update hidden input
+  input.value = color;
+
+  // ferme le picker après sélection
+  picker.classList.remove("is-open");
+
+  // déclenche le flow existant de l'app
+  input.dispatchEvent(new Event("input", { bubbles: true }));
+  input.dispatchEvent(new Event("change", { bubbles: true }));
+});
+          
+          DOM.settingsPanel.addEventListener("click", (e) => {
+  const swatch = e.target.closest(".color-swatch");
+  if (!swatch) return;
+
+  const picker = swatch.closest(".color-input-wrap");
+  if (!picker) return;
+  if (picker.classList.contains("is-disabled")) return;
+
+  const input = picker.querySelector(
+    'input[data-role$="-color"], input[data-setting$="-color"]'
+  );
+  const current = picker.querySelector(".color-current");
+  const color = swatch.dataset.color;
+
+  if (!input || !color || input.disabled) return;
+
+  input.value = color;
+
+  if (current) {
+    current.style.backgroundColor = color;
+  }
+
+  picker.classList.remove("is-open");
+
+  input.dispatchEvent(new Event("input", { bubbles: true }));
+  input.dispatchEvent(new Event("change", { bubbles: true }));
+});
+          
+    // 4b) Open / close custom color picker
     DOM.table.addEventListener("click", (e) => {
-        const swatch = e.target.closest(".color-swatch");
-        if (!swatch) return;
+    const current = e.target.closest(".color-current");
+    if (!current) return;
 
-        const picker = swatch.closest(".color-input-wrap");
-        if (!picker) return;
+    const picker = current.closest(".color-input-wrap");
+    if (!picker) return;
 
-        const input = picker.querySelector(".color-input");
-        const current = picker.querySelector(".color-current");
-        const color = swatch.dataset.color;
+    // bloque l'ouverture si thème actif / picker désactivé
+    if (picker.classList.contains("is-disabled")) return;
 
-        if (!input || !color) return;
+    // un seul picker ouvert à la fois
+    const willOpen = !picker.classList.contains("is-open");
+    closeAllColorPickers();
 
-        // update visuel
-        if (current) {
-        current.style.backgroundColor = color;
-        }
-
-        // update hidden input
-        input.value = color;
-
-        // déclenche le flow existant de l'app
-        input.dispatchEvent(new Event("input", { bubbles: true }));
-        input.dispatchEvent(new Event("change", { bubbles: true }));
+    if (willOpen) {
+        picker.classList.add("is-open");
+    }
+    });
+          
+    // 4c) Close custom color pickers when clicking outside
+    document.addEventListener("click", (e) => {
+    if (e.target.closest(".color-input-wrap")) return;
+    closeAllColorPickers();
     });
 
     // 5) Actions: boutons

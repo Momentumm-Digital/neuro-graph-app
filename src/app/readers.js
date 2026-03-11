@@ -84,6 +84,7 @@ export const Readers = {
         const colorScheme = panel.querySelector('[data-setting="color-scheme"]');
         //const colorScheme = panel.querySelector('[data-setting="color-scheme"]:checked');
         const density = panel.querySelector('[data-setting="layout-density"]:checked');
+        const chartTitle = panel.querySelector('[data-setting="chart-title"]');
 
         return {
             scale: {
@@ -97,6 +98,7 @@ export const Readers = {
                 showTitle: showTitle ? !!showTitle.checked : false,
                 showX: showX ? !!showX.checked : true,
                 showY: showY ? !!showY.checked : true,
+                title: chartTitle ? chartTitle.value.trim() : "",
                 showValues: showValues ? !!showValues.checked : true,
             },
             colors: {
@@ -106,6 +108,7 @@ export const Readers = {
             layout: {
                 density: density ? density.value : "standard",
             },
+            
         };
     },
 
