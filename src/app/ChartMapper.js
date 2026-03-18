@@ -70,6 +70,7 @@ if (d.type === "zone" && d.zone?.min !== null && d.zone?.max !== null) {
               yMax: d.zone.max,
               backgroundColor: color,
               borderWidth: 0,
+              drawTime: "beforeDatasetsDraw",
             }
           : {
               type: "box",
