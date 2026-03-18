@@ -29,6 +29,9 @@ export const Templates = {
   qi: {
     id: "qi",
     label: "Template 1 — QI",
+    layout: {
+    mode: "compact",
+    },
     chartType: "bar-vertical",
     scale: { auto: false, min: 0, max: 100, step: 10 },
     items: [
@@ -59,6 +62,9 @@ export const Templates = {
   qidi: {
     id: "qidi",
     label: "Template 2 — QI-DI",
+    layout: {
+    mode: "compact",
+    },
     chartType: "bar-vertical",
     scale: { auto: false, min: 10, max: 115, step: 5 },
     items: [
@@ -87,6 +93,9 @@ export const Templates = {
   attention: {
     id: "attention",
     label: "Template 3 — Attention",
+    layout: {
+    mode: "standard",
+    },
     chartType: "bar-vertical",
     scale: { auto: false, min: 0, max: 100, step: 10 },
     items: [
@@ -105,7 +114,7 @@ export const Templates = {
     ],
     respondents: [],
     drawings: [
-      { type: "zone", zone: { min: 25, max: 50, color: "#22c55e" } },
+      { type: "zone", zone: { min: 25, max: 75, color: "#22c55e" } },
       { type: "line", line: { value: 50, style: "solid", color: "#0f172a" } },
       { type: "line", line: { value: 25, style: "dash", color: "#94a3b8" } },
       { type: "line", line: { value: 75, style: "dash", color: "#94a3b8" } },
@@ -117,6 +126,9 @@ export const Templates = {
   basc3: {
     id: "basc3",
     label: "Template 4 — BASC-3",
+    layout: {
+    mode: "standard",
+   },
     chartType: "bar-vertical",
     scale: { auto: false, min: 30, max: 90, step: 5 },
     items: [

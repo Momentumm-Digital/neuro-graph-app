@@ -17,7 +17,7 @@ export const ChartMapper = {
         Utils.toNumber(row.scores?.[resp.colId], 0)
       ),
       borderColor: resp.color,
-      backgroundColor: Utils.hexToRgba(resp.color, 0.85) || resp.color,
+      backgroundColor: Utils.hexToRgba(resp.color, 0.95) || resp.color,
       fill: false,
       tension: 0.25,
     }));
@@ -78,6 +78,7 @@ if (d.type === "zone" && d.zone?.min !== null && d.zone?.max !== null) {
               xMax: d.zone.max,
               backgroundColor: color,
               borderWidth: 0,
+              drawTime: "beforeDatasetsDraw",
             };
       }
     });

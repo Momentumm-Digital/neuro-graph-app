@@ -16,8 +16,12 @@ export const TemplateActions = {
 
     // 1) Chart type
     State.chartType = tpl.chartType || "bar-vertical";
+    
+    // 1) Chart layout
 
-    // 2) Scale settings
+    State.layout = tpl.layout || { mode: "standard" };
+
+    //3) Scale settings
     this.setInput(
       '[data-setting="scale-auto"]',
       tpl.scale?.auto ?? true,
