@@ -24,7 +24,7 @@ export const Layout = {
 
     const wrap = DOM.canvas?.closest(".panel.is-chart");
     if (!wrap) return;
-
+//ajout
     wrap.classList.toggle("is-compact", State.layout?.mode === "compact");
     wrap.classList.toggle("is-standard", State.layout?.mode !== "compact");
 
