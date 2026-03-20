@@ -33,6 +33,10 @@ export const State = {
     scheme: "calm",
   },
 
+  layout: {
+    mode: "standard",
+  },
+
   // runtime
   chart: null,
 

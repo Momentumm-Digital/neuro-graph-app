@@ -72,7 +72,7 @@ export const TemplateActions = {
     // 5) Layout settings
     this.setRadioInput(
       '[data-setting="layout-density"]',
-      tpl.layout?.density ?? "standard"
+      tpl.layout?.mode ?? "standard"
     );
 
     // 6) Rows / items

@@ -10,17 +10,26 @@ export const ChartMapper = {
   // ----------------------------
   buildChartData() {
     const labels = State.rows.map((r) => r.item || "—");
-
+    const isBar = State.chartType === "bar-vertical" || State.chartType === "bar-horizontal";
+    const isCompact = State.layout?.mode === "compact";
     const datasets = State.respondents.map((resp) => ({
-      label: resp.name || resp.colId,
-      data: State.rows.map((row) =>
-        Utils.toNumber(row.scores?.[resp.colId], 0)
-      ),
-      borderColor: resp.color,
-      backgroundColor: Utils.hexToRgba(resp.color, 0.95) || resp.color,
-      fill: false,
-      tension: 0.25,
-    }));
+    label: resp.name || resp.colId,
+    data: State.rows.map((row) =>
+    Utils.toNumber(row.scores?.[resp.colId], 0)
+    ),
+    borderColor: resp.color,
+    backgroundColor: Utils.hexToRgba(resp.color, 0.95) || resp.color,
+    fill: false,
+    tension: 0.25,
+
+    ...(isBar
+      ? {
+        categoryPercentage: isCompact ? 0.82 : 0.80,
+        barPercentage: isCompact ? 0.92 : 0.9,
+        maxBarThickness: isCompact ? 65 : 80,
+        }
+      : {}),
+  }));
 
     // ✅ Debug (retire quand c'est stable)
     console.log("[ChartMapper] buildChartData()", { labels, datasets });
@@ -52,6 +61,7 @@ export const ChartMapper = {
 					borderColor: color,          
           borderWidth: 2,
           borderDash: d.line.style === "dash" ? [6, 6] : undefined,
+          drawTime: "beforeDatasetsDraw",
         };
       }
 
@@ -104,7 +114,12 @@ if (d.type === "zone" && d.zone?.min !== null && d.zone?.max !== null) {
       maintainAspectRatio: false,
 
       layout: {
-        padding: 20,
+        padding: {
+        left:  20,
+        right: 20,
+        top: 10,
+        bottom: 10,
+        },
       },
 
       plugins: {

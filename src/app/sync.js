@@ -15,6 +15,11 @@ export function syncAndRender() {
   State.drawings = Readers.readDrawings();
 
   const settings = Readers.readSettings();
+  console.log("settings.layout", settings.layout);
+  console.log(
+  "checked radio",
+  document.querySelector('[data-setting="layout-density"]:checked')?.value
+  );
   State.scale = settings.scale;
   State.text = settings.text;
 
@@ -27,9 +32,9 @@ export function syncAndRender() {
   DOM.chartTitle.style.display = State.text.showTitle ? "" : "none";
 }
 
-  State.layout = settings.layout || State.layout || { density: "standard" };
+  State.layout = settings.layout || State.layout || { mode: "standard" };
 
-  Layout.applyChartAutoHeight();
+  Layout.applyChartLayoutMode();
 
   UI.toggleRespondentPickersDisabled(State.colors?.enabled);
   UI.syncAllColorPickers();

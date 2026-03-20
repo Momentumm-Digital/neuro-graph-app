@@ -106,7 +106,7 @@ export const Readers = {
                 scheme: colorScheme ? colorScheme.value : "calm",
             },
             layout: {
-                density: density ? density.value : "standard",
+                mode: density ? density.value : "standard",
             },
             
         };
