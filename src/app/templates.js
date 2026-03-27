@@ -46,7 +46,7 @@ export const Templates = {
     respondents: [],
     drawings: [
       // Zone verte 25-50
-      { type: "zone", zone: { min: 25, max: 50, color: "#22c55e" } },
+      { type: "zone", zone: { min: 25, max: 75, color: "#22c55e" } },
 
       // Ligne gras 50
       { type: "line", line: { value: 50, style: "solid", color: "#0f172a" } },

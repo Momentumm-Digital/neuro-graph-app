@@ -1,9 +1,9 @@
 import { Utils } from "./utils.js";
 
 const SAULE_SCHEMES = {
-  calm: ["#2F6B4F", "#3D8C6E", "#78C2A4", "#BFE9D7", "#E7F7F1"],
-  contrast: ["#1F6F8B", "#155368", "#99C7D6", "#6FAFC3", "#E6F2F5"],
-  neutral: ["#111827", "#374151", "#6B7280", "#9CA3AF", "#E5E7EB"],
+  saule_naturel: ["#365857", "#6CA494", "#94A398", "#AFD0BB", "#D4E6CD"],
+  saule_air: ["#6CA494", "#AFD0BB", "#D4E6CD", "#D9DFDB", "#74898C"],
+  saule_brume: ["#063533", "#365857", "#74898C", "#94A398", "#D9DFDB"],
 };
 
 export const Colors = {
