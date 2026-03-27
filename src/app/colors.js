@@ -8,7 +8,7 @@ const SAULE_SCHEMES = {
 
 export const Colors = {
   getScheme(name) {
-    return SAULE_SCHEMES[name] || SAULE_SCHEMES.calm;
+    return SAULE_SCHEMES[name] || SAULE_SCHEMES.saule_naturel;
   },
   applyScheme(chart, schemeName, opts = {}) {
     if (!chart) return;
